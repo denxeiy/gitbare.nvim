@@ -1,6 +1,6 @@
 # **I. GitBare.nvim**
 
-PLugin for Neovim to search files, words and navigate through your "bare" git repository.
+Plugin for Neovim to search files, words and navigate through your "bare" git repository.
 
 Decided to make one because couldn't find any in GitHub. There is some plugins, like fugitive and ":Telescope git_files" command from telescope, but they were not enough and didn't work with "bare's" the way i wanted to.
 
@@ -41,7 +41,7 @@ I only use Lazy plugin manager, so here is setup config for lazy only.
 If you got other plugin manager - i hope you'll figure out how install gitbare.nvim. If not - leave a issue and we'll figure it out together eventually.
 
 ---------------------
-# **III. Usage**
+# **III. How it works**
 
 **File browser** - making the tree with parent-child system from all of your paths to files in git with: date and time of last change, git status, sizes, names.
 
