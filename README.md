@@ -62,3 +62,8 @@ All you have to do to start is set this 2 fields:
 2. [telescope-nvim/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 3. [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 4. Git (if you ain't got git - maybe you don't need this plugin. In case you do - search web for ways to install git on your specific device and OS)
+
+---------------------
+# ***LICENSE*
+
+MIT
