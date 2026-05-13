@@ -2,14 +2,14 @@ return {
     "denxeiy/gitbare.nvim",
     dependencies = {
         "telescope-nvim/telescope.nvim", -- dependency for beautiful UI windows and navigation
-        "nvim-tree/nvim-web-devicons", -- dependency for beautoful colorful icons
+        "nvim-tree/nvim-web-devicons", -- dependency for beautiful colorful icons
     },
     config = function ()
-        require("gitbare").setup({ -- setup is strongly required
+        require("gitbare").setup({ -- setup is strongly required, maybe won't work without it
             dir = "/home/user", -- or any other directory. i prefer to use $HOME
-            git_dir_name = ".git", -- or .*any*, depends on how you named it
-            find_in_current_dir = false, -- false - search system-wide in your bare git repo, true - only in current dir
-            grep_in_current_dir = false, -- same as above but for live grep
+            git_dir_name = ".git", -- or .*any*, depends on how you named it if your place
+            find_in_current_dir = false, -- false - search system-wide in your bare git repo, true - only in current dir (pwd)
+            grep_in_current_dir = false, -- same as above but for live grep, search by words
         })
         vim.keymap.set("n", "<leader>cb", function() -- file browser, you can put keymap in your separate file with mappings or change keys here
                 require("gitbare").gitbare_browser() -- if you will set keymap somewhere else - do it with this function()
