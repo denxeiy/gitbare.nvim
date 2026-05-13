@@ -64,6 +64,6 @@ All you have to do to start is set this 2 fields:
 4. Git (if you ain't got git - maybe you don't need this plugin. In case you do - search web for ways to install git on your specific device and OS)
 
 ---------------------
-# ***LICENSE**
+# **LICENSE**
 
 MIT
