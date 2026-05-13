@@ -1,10 +1,8 @@
 local M = {}
 
--- Open a node inside the bare repo tree
 local function open_node(current)
     local entries = {}
 
-    -- Add "up" entry if parent exists
     if current.parent ~= nil then
         table.insert(entries, {
             kind    = "up",
@@ -14,7 +12,6 @@ local function open_node(current)
         })
     end
 
-    -- Add directories first
     for name, child in pairs(current.children) do
         if not child.is_file then
             table.insert(entries, {
@@ -26,7 +23,6 @@ local function open_node(current)
         end
     end
 
-    -- Add files second
     for name, child in pairs(current.children) do
         if child.is_file then
             table.insert(entries, {
@@ -39,7 +35,6 @@ local function open_node(current)
         end
     end
 
-    -- Lazy-load Telescope modules
     local pickers      = require("telescope.pickers")
     local finders      = require("telescope.finders")
     local conf         = require("telescope.config").values
@@ -100,7 +95,6 @@ local function open_node(current)
         :find()
 end
 
--- Public API
 function M.open(node)
     return open_node(node)
 end
