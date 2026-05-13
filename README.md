@@ -2,7 +2,7 @@
 
 PLugin for Neovim to search files, words and navigate through your "bare" git repository.
 
-Decided to make one because couldn't find any in GitHub. Though fugitive and telescope were not enough, just didn't work.
+Decided to make one because couldn't find any in GitHub. There is some plugins, like fugitive and ":Telescope git_files" command from telescope, but they were not enough and didn't work with "bare's" the way i wanted to.
 
 ---------------------
 # **II. Installation**
@@ -12,14 +12,14 @@ return {
     "denxeiy/gitbare.nvim",
     dependencies = {
         "telescope-nvim/telescope.nvim", -- dependency for beautiful UI windows and navigation
-        "nvim-tree/nvim-web-devicons", -- dependency for beautoful colorful icons
+        "nvim-tree/nvim-web-devicons", -- dependency for beautiful colorful icons
     },
     config = function ()
-        require("gitbare").setup({ -- setup is strongly required
+        require("gitbare").setup({ -- setup is strongly required, maybe won't work without it
             dir = "/home/user", -- or any other directory. i prefer to use $HOME
-            git_dir_name = ".git", -- or .*any*, depends on how you named it
-            find_in_current_dir = false, -- false - search system-wide in your bare git repo, true - only in current dir
-            grep_in_current_dir = false, -- same as above but for live grep
+            git_dir_name = ".git", -- or .*any*, depends on how you named it if your place
+            find_in_current_dir = false, -- false - search system-wide in your bare git repo, true - only in current dir (pwd)
+            grep_in_current_dir = false, -- same as above but for live grep, search by words
         })
         vim.keymap.set("n", "<leader>cb", function() -- file browser, you can put keymap in your separate file with mappings or change keys here
                 require("gitbare").gitbare_browser() -- if you will set keymap somewhere else - do it with this function()
@@ -36,7 +36,7 @@ return {
 }
 ```
 You can take this block of code and put in lazy or download file from repo and put it in your directory, where stored all of your plugins.
-I only use Lazy plugin manager, so here is setup config for lazy.
+I only use Lazy plugin manager, so here is setup config for lazy only.
 
 If you got other plugin manager - i hope you'll figure out how install gitbare.nvim. If not - leave a issue and we'll figure it out together eventually.
 
@@ -47,9 +47,9 @@ If you got other plugin manager - i hope you'll figure out how install gitbare.n
 
 Then it creates preview window and picker window from Telescope builtin functions and lets you see git repo as file system.
 
-**Find files and live grep** - taking file list and statuses from git. Then making picker window as described above. Find files - just search in your paths, live grep - search words inside files.
+**Find files and live grep** - taking file list and statuses from git. Then making picker window as described above. Find files - just search files or directories with keywords in your git tracked paths, live grep - search words inside files.
 
-Just like Telescope itself.
+Just like Telescope itself with its ":Telescope find_files" and ":Telescope live_grep". But only in specific paths.
 
 All you have to do to start is set this 2 fields:
 - dir - directory where folder ".git" presents;
