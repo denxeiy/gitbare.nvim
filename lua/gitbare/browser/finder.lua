@@ -1,3 +1,6 @@
+local filter = require("gitbare.browser.filter")
+filter.load_state()
+
 local M = {}
 
 local function open_node(current)
@@ -35,23 +38,29 @@ local function open_node(current)
         end
     end
 
-    local pickers      = require("telescope.pickers")
-    local finders      = require("telescope.finders")
-    local conf         = require("telescope.config").values
-    local actions      = require("telescope.actions")
-    local action_st    = require("telescope.actions.state")
-    local previewers   = require("telescope.previewers")
-    local entry_maker_browse  = require("gitbare.browser.entry_maker_browse")
-    local def_prev     = require("gitbare.browser.previewer")
+    local pickers            = require("telescope.pickers")
+    local finders            = require("telescope.finders")
+    local conf               = require("telescope.config").values
+    local actions            = require("telescope.actions")
+    local action_st          = require("telescope.actions.state")
+    local previewers         = require("telescope.previewers")
+    local entry_maker_browse = require("gitbare.browser.entry_maker_browse")
+    local def_prev           = require("gitbare.browser.previewer")
+
+    local function make_finder()
+        local filtered = filter.filter_entries(entries)
+
+        return finders.new_table({
+            results     = filtered,
+            entry_maker = entry_maker_browse.entry,
+        })
+    end
 
     pickers
         .new({}, {
             prompt_title = "GitBare File Browser",
 
-            finder = finders.new_table({
-                results     = entries,
-                entry_maker = entry_maker_browse.entry,
-            }),
+            finder = make_finder(),
 
             sorter = conf.generic_sorter({}),
 
@@ -59,13 +68,13 @@ local function open_node(current)
                 define_preview = def_prev.define_preview,
             }),
 
-            attach_mappings = function(_, map)
-                local function open_selected(prompt_bufnr)
+            attach_mappings = function(prompt_bufnr, map)
+                local function open_selected(prompt_bufnr_inner)
                     local selection = action_st.get_selected_entry()
                     if not selection then return end
 
                     local entry = selection.value
-                    actions.close(prompt_bufnr)
+                    actions.close(prompt_bufnr_inner)
 
                     local function normalize_path(path)
                         if not path or path == "" or path == "." then
@@ -88,6 +97,8 @@ local function open_node(current)
 
                 map("i", "<CR>", open_selected)
                 map("n", "<CR>", open_selected)
+
+                filter.attach_mappings(prompt_bufnr, map, make_finder)
 
                 return true
             end,

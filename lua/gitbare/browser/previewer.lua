@@ -1,6 +1,7 @@
 local fmt        = require("gitbare.browser.format")
 local devicons   = require("nvim-web-devicons")
 local previewers = require("telescope.previewers")
+local filter = require("gitbare.browser.filter")
 
 local M = {}
 
@@ -37,6 +38,12 @@ function M.define_preview(self, entry, _)
             icon_hl = "Directory"
         end
 
+        if filter.state.filter then
+            if not child.git_status or vim.trim(child.git_status) == "" then
+                goto continue
+            end
+        end
+
         table.insert(items, {
             name    = name,
             is_file = child.is_file,
@@ -46,6 +53,7 @@ function M.define_preview(self, entry, _)
             mtime   = child.mtime,
             git     = fmt.normalize_git_status(child.git_status)
         })
+        ::continue::
     end
 
     table.sort(items, function(a, b)

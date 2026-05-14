@@ -7,6 +7,7 @@ M.options = {
   find_in_current_dir = true,
   grep_in_current_dir = true,
   work_tree = nil,
+  filter_key = "<C-f>"
 }
 
 function M.setup(opts)
