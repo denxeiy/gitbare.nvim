@@ -27,10 +27,11 @@ function M.gitbare_browser()
 
     if git_root then
         local ok = pcall(function()
-            require("telescope.builtin").git_files({
-                cwd            = git_root,
-                show_untracked = false,
-            })
+            -- require("telescope.builtin").git_files({
+            --     cwd            = git_root,
+            --     show_untracked = false,
+            -- })
+            return finder.open(root)
         end)
 
         if not ok then

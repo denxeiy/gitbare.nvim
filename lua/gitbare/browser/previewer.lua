@@ -59,7 +59,8 @@ function M.define_preview(self, entry, _)
 
     for _, it in ipairs(items) do
         local name_col = fmt.truncate_or_pad(it.name, fmt.NAME_WIDTH_PREVIEWER)
-        local git_col  = fmt.pad_right(it.git, fmt.GIT_WIDTH)
+        -- local git_col  = fmt.pad_right(it.git, fmt.GIT_WIDTH)
+        local git_col  = it.git
         local size_col = fmt.pad_left(fmt.format_size(it.size), fmt.SIZE_WIDTH)
         local date_col = fmt.pad_left(fmt.format_mtime(it.mtime), fmt.DATE_WIDTH)
 
@@ -67,8 +68,8 @@ function M.define_preview(self, entry, _)
         local line = string.format(
             "%s %s %s %s %s",
             icon_col,
-            name_col,
             git_col,
+            name_col,
             size_col,
             date_col
         )

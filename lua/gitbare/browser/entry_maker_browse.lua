@@ -28,7 +28,8 @@ function M.entry(entry)
     local git     = fmt.normalize_git_status(raw_git)
 
     local name_col = fmt.truncate_or_pad(entry.display, fmt.NAME_WIDTH_ENTRY)
-    local git_col  = fmt.pad_right(git, fmt.GIT_WIDTH)
+    -- local git_col  = fmt.pad_right(git, fmt.GIT_WIDTH)
+    local git_col  = git
     local size_col = fmt.pad_left(fmt.format_size(size), fmt.SIZE_WIDTH)
     local date_col = fmt.pad_left(fmt.format_mtime(mtime), fmt.DATE_WIDTH)
 
@@ -43,8 +44,8 @@ function M.entry(entry)
             local text = string.format(
                 "%s %s %s %s %s",
                 icon_col,
-                name_col,
                 git_col,
+                name_col,
                 size_col,
                 date_col
             )
