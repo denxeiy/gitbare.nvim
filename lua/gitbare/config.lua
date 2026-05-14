@@ -4,8 +4,8 @@ M.options = {
   dir = nil,
   git_dir_name = nil,
   git_dir = nil,
-  find_in_current_dir = true,
-  grep_in_current_dir = true,
+  find_in_current_dir = false,
+  grep_in_current_dir = false,
   work_tree = nil,
   filter_key = "<C-f>"
 }
