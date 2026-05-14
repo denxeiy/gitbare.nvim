@@ -20,6 +20,7 @@ return {
             git_dir_name = ".git", -- or .*any*, depends on how you named it if your place
             find_in_current_dir = false, -- false - search system-wide in your bare git repo, true - only in current dir (pwd)
             grep_in_current_dir = false, -- same as above but for live grep, search by words
+            filter_key = "<C-f>", -- keybind to toggle filter that shows all files and dirs with files, or only modified files and dirs with modified files
         })
         vim.keymap.set("n", "<leader>cb", function() -- file browser, you can put keymap in your separate file with mappings or change keys here
                 require("gitbare").gitbare_browser() -- if you will set keymap somewhere else - do it with this function()
