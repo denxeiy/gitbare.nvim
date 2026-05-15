@@ -11,6 +11,12 @@ function M.setup(opts)
     local builtin = require("telescope.builtin")
     builtin.gitbare_find_files = ff.find_files
     builtin.gitbare_live_grep = lg.live_grep
+-----------------commands--------------------
+    local cmds = require("gitbare.commands")
+    for name, fn in pairs(cmds) do
+        vim.api.nvim_create_user_command(name, fn, {})
+    end
+---------------------------------------------
 end
 
 M.gitbare_browser = require("gitbare.browser.browser").gitbare_browser

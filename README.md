@@ -33,6 +33,12 @@ return {
         vim.keymap.set("n", "<leader>cg", function() -- live grep, you can put keymap in your separate file with mappings or change keys here
             require("telescope.builtin").gitbare_live_grep() -- if you will set keymap somewhere else - do it with this function()
         end, { desc = "GitBare Live Grep" }) -- if you don't need this bind - just comment it with "--" on left side
+
+        ------------------------or you can add keymaps like this, using commands-----------------------
+        -- vim.keymap.set("n", "<leader>cb", "<CMD>BareBrowser<CR>", { desc = "GitBare File Browser" })
+        -- vim.keymap.set("n", "<leader>cf", "<CMD>BareFiles<CR>", { desc = "GitBare Find Files" })
+        -- vim.keymap.set("n", "<leader>cg", "<CMD>BareGrep<CR>", { desc = "GitBare Live Grep" })
+
     end, -- at the end of installation you can remove all of my silly comments like this one :)
 }
 ```
