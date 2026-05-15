@@ -1,5 +1,7 @@
 local M = {}
 
+M.last_status_map = nil
+
 local function git_list_files(gitdir)
     return vim.fn.systemlist(
         string.format('git --git-dir="%s" ls-tree -r --name-only HEAD', gitdir)
@@ -25,6 +27,8 @@ end
 function M.scan_repo(dir, gitdir)
     local files = git_list_files(gitdir)
     local statuses = git_status_map(gitdir, dir)
+
+    M.last_status_map = statuses
 
     local results = {}
 
